@@ -59,21 +59,6 @@ interface GigabitEthernet0/1
  ip nat outside
 ```
 
-## Troubleshooting
-
-Initially, NAT translations appeared in the translation table, but the inside global address was incorrectly showing as 192.168.1.1 instead of 203.0.113.1.
-
-Inspection of the running configuration revealed that the PAT command referenced GigabitEthernet0/0 instead of GigabitEthernet0/1.
-
-The incorrect command was removed and replaced with the correct interface reference:
-
-```cisco
-no ip nat inside source list 10 interface GigabitEthernet0/0 overload
-ip nat inside source list 10 interface GigabitEthernet0/1 overload
-```
-
-After correcting the configuration, NAT translations showed the expected inside global address of 203.0.113.1.
-
 ## Verification
 
 Commands used:
